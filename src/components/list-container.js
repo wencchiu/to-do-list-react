@@ -6,20 +6,39 @@ class ListContainer extends Component {
     super(props);
     this.state = {
       tasks: [],
+      arrTaskNum: []
     }
     this.deleteClicked = this.deleteClicked.bind(this);
+    this.newTaskRender = this.newTaskRender.bind(this);
   }
 
-  deleteClicked(clicked) {
-    this.state.tasks.splice()
+  deleteClicked(taskNum) {
+    let index = this.state.arrTaskNum.indexOf(taskNum);
+    this.state.tasks.splice(index, 1)
+    this.setState({
+      tasks: this.state.tasks
+    })
+    this.state.arrTaskNum.splice(index, 1)
+  }
+
+  newTaskRender () {
+    if (this.props.taskNum !== 0) {
+      this.state.tasks.push(<NewTask newTask={this.props.newTask.trim()}
+        key={this.props.taskNum} deleteClicked={this.deleteClicked}
+        taskNum={this.props.taskNum} />)
+      this.state.arrTaskNum.push(this.props.taskNum);
+      this.setState({
+        previousTaskNum: this.props.taskNum
+      })
+
+    }
   }
 
   render() {
-    if (this.props.taskNum !== 0) {
-      this.state.tasks.push(<NewTask newTask={this.props.newTask}
-        key={this.props.taskNum} deleteClicked={this.deleteClicked} />)
+    let taskCompare = this.props.taskNum === this.state.previousTaskNum
+    if (!taskCompare) {
+      this.newTaskRender ()
     }
-
 
     return (
       <div className="to-do-list-container" id="list-container">

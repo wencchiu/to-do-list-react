@@ -6,6 +6,9 @@ import InputBtn from "./input-btn";
 class InputContainer extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      currentTaskText: ""
+    }
     this.submitNewTask = this.submitNewTask.bind(this);
     this.setCurrentTaskText = this.setCurrentTaskText.bind(this);
   }
@@ -18,7 +21,6 @@ class InputContainer extends Component {
     this.setState({currentTaskText: ''});
     this.props.newTask(this.state.currentTaskText);
   }
-
 
   render() {
     return (

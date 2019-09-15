@@ -1,20 +1,29 @@
-import React from "react";
+import React, {Component} from "react";
 import BtnUp from "./btn-up"
 import BtnDown from "./btn-down";
 import BtnModify from "./btn-modify"
 import BtnDelete from "./btn-delete";
 import TaskText from "./task-text"
 
-let NewTask = (props) => {
+class NewTask extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      taskNum: this.props.taskNum
+    }
+  }
+
+  render () {
     return (
       <li>
-        <TaskText newTask={props.newTask}/>
+        <TaskText newTask={this.props.newTask}/>
         <BtnUp />
         <BtnDown />
         <BtnModify />
-        <BtnDelete deleteClicked={props.deleteClicked} />
+        <BtnDelete deleteClicked={this.props.deleteClicked} taskNum={this.state.taskNum} />
       </li>
     );
+  }
 }
 
 export default NewTask;

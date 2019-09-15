@@ -3,15 +3,12 @@ import React, {Component} from "react";
 class Input extends Component {
   constructor(props) {
     super(props);
-    // this.inputEnterKeyup = this.inputEnterKeyup.bind(this);
     this.onChange = this.onChange.bind(this);
     this.submit = this.submit.bind(this);
-    this.state = {
-      taskText: ""
-    }
   }
 
   submit(e) {
+    console.log(this.currentTaskText.length);
     if (this.currentTaskText.length >= 1) {
         if (e.keyCode === 13) {
           this.props.submit();
@@ -20,7 +17,7 @@ class Input extends Component {
   }
 
   onChange (e) {
-    this.currentTaskText = e.target.value;
+    this.currentTaskText = e.target.value.trim();
     this.props.onChange(e.target.value);
   }
 
