@@ -1,16 +1,8 @@
-import React, {Component} from "react";
+import React from "react";
 
-class InputBtn extends Component {
-  constructor(props) {
-    super(props);
-  }
-  
-  render() {
+let InputBtn = (props) => {
     return <button id="input-btn"
-    onClick={this.props.onClick}>ADD</button>;
+    onClick={props.onClick}>ADD</button>;
   }
-}
-
-
 
 export default InputBtn;
