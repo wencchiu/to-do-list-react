@@ -1,49 +1,56 @@
 import React, {Component} from "react";
-import NewTask from "./list-new-task";
+import Task from "./task";
 
 class ListContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      tasks: [],
-      arrTaskNum: []
-    }
-    this.deleteClicked = this.deleteClicked.bind(this);
-    this.newTaskRender = this.newTaskRender.bind(this);
-  }
 
-  deleteClicked(taskNum) {
-    let index = this.state.arrTaskNum.indexOf(taskNum);
-    this.state.tasks.splice(index, 1)
-    this.setState({
-      tasks: this.state.tasks
-    })
-    this.state.arrTaskNum.splice(index, 1)
   }
+  //
+  // modifyClicked (taskNum) {
+  //   console.log(taskNum);
+  //   this.setState((state, props) => {
+  //     return {taskInEdit: !(state.taskInEdit)}
+  //   })
+  // }
 
-  newTaskRender () {
-    if (this.props.taskNum !== 0) {
-      this.state.tasks.push(<NewTask newTask={this.props.newTask.trim()}
-        key={this.props.taskNum} deleteClicked={this.deleteClicked}
-        taskNum={this.props.taskNum} />)
-      this.state.arrTaskNum.push(this.props.taskNum);
-      this.setState({
-        previousTaskNum: this.props.taskNum
-      })
+  // deleteClicked(taskNum) {
+  //   let index = this.state.arrTaskNum.indexOf(taskNum);
+  //   this.state.tasks.splice(index, 1)
+  //   this.setState({
+  //     tasks: this.state.tasks
+  //   })
+  //   this.state.arrTaskNum.splice(index, 1)
+  // }
 
-    }
-  }
+//  newTaskRender () {
+  //  if (this.props.taskNum !== 0) {
+  //    this.state.tasks.push(<Task newTask={this.props.newTask.trim()}
+  //      key={this.props.taskNum} deleteClicked={this.deleteClicked}
+  //      taskNum={this.props.taskNum} modifyClicked={this.modifyClicked}
+  //      taskInEdit={this.state.taskInEdit} />)
+  //    this.state.arrTaskNum.push(this.props.taskNum);
+  //    this.setState({
+  //      previousTaskNum: this.props.taskNum
+  //     })
+  //
+  //   }
+  // }
+
+
 
   render() {
-    let taskCompare = this.props.taskNum === this.state.previousTaskNum
-    if (!taskCompare) {
-      this.newTaskRender ()
-    }
-
+    var taskList = this.props.taskNumAndTasks.map((task) =>
+      <Task taskContent={task.taskContent} key={task.taskNum}
+      taskNum={task.taskNum} modifyClicked={this.props.modifyClicked}
+      deleteClicked={this.props.deleteClicked}
+      editTaskContent={this.props.editTaskContent}
+      moveTaskUp={this.props.moveTaskUp} moveTaskDown={this.props.moveTaskDown} />
+    )
     return (
       <div className="to-do-list-container" id="list-container">
         <ul className="to-do-list" id="to-do-list">
-          {this.state.tasks}
+          {taskList}
         </ul>
       </div>
     )

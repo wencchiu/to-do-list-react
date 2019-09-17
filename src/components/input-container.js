@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import Input from "./input";
-import Title from "./title";
 import InputBtn from "./input-btn";
 
 class InputContainer extends Component {
@@ -19,13 +18,13 @@ class InputContainer extends Component {
 
   submitNewTask () {
     this.setState({currentTaskText: ''});
-    this.props.newTask(this.state.currentTaskText);
+    this.props.addInputTask(this.state.currentTaskText);
   }
 
   render() {
     return (
       <div className="title-input-container">
-        <Title />
+        <h1 className="title">To-do List</h1>
         <Input onChange={this.setCurrentTaskText}
         currentTaskText={this.state.currentTaskText}
           submit={this.submitNewTask} />
