@@ -1,59 +1,62 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
+import styled from "styled-components";
 import Task from "./task";
 
-class ListContainer extends Component {
-  constructor(props) {
-    super(props);
+const Wrapper = styled.div`
+  width: 90%;
+  min-width: 800px;
+  max-width: 1400px;
+  margin: auto;
 
+  @media (max-width: 1024px) {
+    min-width: 300px;
   }
-  //
-  // modifyClicked (taskNum) {
-  //   console.log(taskNum);
-  //   this.setState((state, props) => {
-  //     return {taskInEdit: !(state.taskInEdit)}
-  //   })
-  // }
 
-  // deleteClicked(taskNum) {
-  //   let index = this.state.arrTaskNum.indexOf(taskNum);
-  //   this.state.tasks.splice(index, 1)
-  //   this.setState({
-  //     tasks: this.state.tasks
-  //   })
-  //   this.state.arrTaskNum.splice(index, 1)
-  // }
+  & > p {
+    text-align: center;
+    font-size: 60px;
+    padding: 20px;
+    background-color: #ececec;
+  }
+`;
 
-//  newTaskRender () {
-  //  if (this.props.taskNum !== 0) {
-  //    this.state.tasks.push(<Task newTask={this.props.newTask.trim()}
-  //      key={this.props.taskNum} deleteClicked={this.deleteClicked}
-  //      taskNum={this.props.taskNum} modifyClicked={this.modifyClicked}
-  //      taskInEdit={this.state.taskInEdit} />)
-  //    this.state.arrTaskNum.push(this.props.taskNum);
-  //    this.setState({
-  //      previousTaskNum: this.props.taskNum
-  //     })
-  //
-  //   }
-  // }
+const List = styled.ul`
+  button {
+    border: none;
+    height: 35px;
+    width: 55px;
+    color: #58564f;
+    margin: 10px;
+    font-weight: bold;
+    cursor: pointer;
 
+    @media (max-width: 1024px) {
+      font-size: 12px;
+      margin: 5px;
+      width: 48px;
+    }
+  }
+`;
 
-
+class ListContainer extends Component {
   render() {
-    var taskList = this.props.taskNumAndTasks.map((task) =>
-      <Task taskContent={task.taskContent} key={task.taskNum}
-      taskNum={task.taskNum} modifyClicked={this.props.modifyClicked}
-      deleteClicked={this.props.deleteClicked}
-      editTaskContent={this.props.editTaskContent}
-      moveTaskUp={this.props.moveTaskUp} moveTaskDown={this.props.moveTaskDown} />
-    )
+    var taskList = this.props.taskNumAndTasks.map(task => (
+      <Task
+        taskContent={task.taskContent}
+        key={task.taskNum}
+        taskNum={task.taskNum}
+        modifyClicked={this.props.modifyClicked}
+        deleteClicked={this.props.deleteClicked}
+        editTaskContent={this.props.editTaskContent}
+        moveTaskUp={this.props.moveTaskUp}
+        moveTaskDown={this.props.moveTaskDown}
+      />
+    ));
     return (
-      <div className="to-do-list-container" id="list-container">
-        <ul className="to-do-list" id="to-do-list">
-          {taskList}
-        </ul>
-      </div>
-    )
+      <Wrapper>
+        <List>{taskList}</List>
+      </Wrapper>
+    );
   }
 }
 

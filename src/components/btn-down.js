@@ -1,8 +1,7 @@
 import React from "react";
 
-let BtnDown = (props) => {
-  return <button className="down" onClick={() =>
-    {props.moveTaskDown(props.taskNum)}}>Down</button>;
-}
+const BtnDown = props => (
+  <button onClick={() => props.moveTaskDown(props.taskNum)}>Down</button>
+);
 
 export default BtnDown;
